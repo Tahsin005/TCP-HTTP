@@ -1,0 +1,18 @@
+JSON (JavaScript Object Notation), is a standard for representing structured data based on JavaScript's object syntax. It is commonly used to transmit data in web apps via HTTP.
+
+{
+    "movies": [
+        {
+            "id": 1,
+            "title": "Iron Man",
+            "director": "Jon Favreau",
+            "favorite": true
+        },
+        {
+            "id": 2,
+            "title": "The Avengers",
+            "director": "Joss Whedon",
+            "favorite": false
+        }
+    ]
+}
