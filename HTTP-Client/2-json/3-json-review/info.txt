@@ -1,0 +1,5 @@
+In JSON, different fields in an object are separated by a...
+- Comma
+
+JSON is a ____
+- Format for communicating and storing data
