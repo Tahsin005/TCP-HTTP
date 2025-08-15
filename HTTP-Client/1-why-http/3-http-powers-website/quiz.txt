@@ -1,0 +1,2 @@
+Website data is requested via which internet communication protocol?
+- HTTP
