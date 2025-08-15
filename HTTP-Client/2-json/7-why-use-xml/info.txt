@@ -1,0 +1,6 @@
+if possible:
+    JSON > XML:
+        because:
+            Lighter-weight
+            Easier to read
+            Has better support in most programming languages
