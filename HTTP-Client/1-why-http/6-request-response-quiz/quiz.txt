@@ -1,2 +1,5 @@
 Does the example code act as a client or a server?
 - Client
+
+The computer responding to requests at the URL 'https://api.boot.dev' is a...
+- Server
