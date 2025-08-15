@@ -1,0 +1,2 @@
+Does the example code act as a client or a server?
+- Client
