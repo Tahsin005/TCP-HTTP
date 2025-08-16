@@ -1,0 +1,25 @@
+Security and Encryption
+
+HTTPS requires that the client use SSL or TLS to protect requests and traffic by encrypting the information in the request. You don’t need to manually handle encryption or decryption—it's all done for you by the protocol. HTTPS is simply HTTP with built-in security!
+(TLS and SSL are both security protocols used to encrypt communication between a client and a server, but TLS is the more modern and secure successor to SSL. While "SSL" is still widely used, technically, most systems now use TLS.)
+
+
+HTTPS != Privacy
+
+    HTTPS will encrypt the data in a request (like passwords, headers, body information, query parameters, etc). You and the recipient are the only ones who can read that information.
+    HTTPS will not hide who you are or that you're communicating with the given server. If you don't want your wife who knows how to sniff network traffic to know you're using meow.dev, HTTPS won't help.
+
+
+HTTPS Verifies the Server
+
+In addition to encrypting the information within a request, HTTPS uses digital signatures to prove that you're communicating with the server that you think you are. If a hacker were to intercept an HTTPS request by tapping into a network cable, they wouldn't be able to successfully pretend they are your bank's web server.
+
+
+HTTPS is essentially the same as HTTP with some additional security
+- True
+
+HTTPS ensures that you know WHO you are communicating with
+- True
+
+HTTPS protects your identity online
+- False (refer to line no: 10)
