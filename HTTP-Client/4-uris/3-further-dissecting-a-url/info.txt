@@ -1,0 +1,37 @@
+There are 8 main parts to a URL, though not all the sections are always present. Each piece plays a role in helping clients locate the droids resources they're looking for.
+
+Part 	    Required
+Protocol 	Yes
+Username 	No
+Password 	No
+Domain 	    Yes
+Port 	    No (defaults to 80 or 443)
+Path 	    No (defaults to /)
+Query 	    No
+Fragment 	No
+
+Port 80:
+    Default for HTTP (HyperText Transfer Protocol).
+    Unencrypted traffic.
+    When you type http://example.com, the browser assumes port 80.
+    Example URL (explicit port shown):
+        http://example.com:80/
+
+Port 443:
+    Default for HTTPS (HTTP Secure).
+    Encrypted traffic (uses TLS/SSL).
+    Protects against eavesdropping and tampering.
+    When you type https://example.com, the browser assumes port 443.
+    Example URL (explicit port shown):
+        https://example.com:443/
+
+
+http://jello.app is a valid URL.
+    Protocol: http:// → present ✔ (uses port 80 by default).
+    Domain: jello.app → valid domain ✔ (TLD .app is a real Google-owned TLD).
+    Path: not specified → defaults to / ✔.
+
+http://username:password is not a valid URL
+    This is NOT a valid URL because:
+    It has no host (domain or IP) after the credentials.
+    The @ symbol is missing — you need it to separate the credentials from the host.
