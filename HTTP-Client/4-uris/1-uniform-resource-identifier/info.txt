@@ -1,0 +1,10 @@
+A URI, or Uniform Resource Identifier, is a unique character sequence that identifies a resource that is (almost always) accessed via the internet.
+
+Just like Golang has syntax rules, so do URIs. These rules help ensure uniformity so that any program can interpret the meaning of the URI in the same way.
+
+URIs come in two main types:
+
+    URLs
+    URNs
+
+A URL specifies the location of a resource on the internet, while a URN identifies a resource by name, regardless of its location.
