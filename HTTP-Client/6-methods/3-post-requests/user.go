@@ -42,13 +42,6 @@ func getUsers(url, apiKey string) ([]User, error) {
 	return users, nil
 }
 
-/*************  ✨ Windsurf Command ⭐  *************/
-
-// logUsers prints out the information of each user in the given slice of User structs.
-//
-// Parameters:
-// - users: a slice of User structs containing information about users.
-/*******  83c53612-a0cc-49b1-9685-200b0c41f28e  *******/
 func logUsers(users []User) {
 	for _, user := range users {
 		fmt.Printf("User Name: %s, Role: %s, Experience: %d, Remote: %v\n", user.User.Name, user.Role, user.Experience, user.Remote)
