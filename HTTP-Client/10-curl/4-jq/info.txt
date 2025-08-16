@@ -1,0 +1,61 @@
+jq is a powerful command-line tool for processing JSON data. It’s a favorite among developers for working with JSON because it can:
+
+    Parse JSON: easily read and extract data from JSON responses.
+    Manipulate JSON: modify JSON data on the fly.
+    Filter JSON: find exactly what you're looking for within large JSON structures.
+
+Most Unix-based systems, including macOS and Linux, do not come with jq pre-installed. Follow these steps to install it on your system.
+
+Check if you have jq installed. Open a terminal and type:
+    jq --version
+
+If you see the version number, you're good to go.
+
+Run and submit the CLI tests.
+
+If you don't have jq installed, install it:
+
+Install on Debian-based systems (like Ubuntu/WSL) with:
+    sudo apt-get update
+    sudo apt-get install jq
+
+
+Suppose you have a JSON file named user.json:
+
+    {
+    "name": "John",
+    "age": 30,
+    "city": "New York"
+    }
+
+
+    jq '.name' user.json
+    # "John"
+
+jq with cURL
+
+jq is frequently used with cURL to parse JSON responses directly from HTTP requests. For example, to fetch JSON data from an API and extract a field we can use the object identifier index:
+
+    curl https://jsonplaceholder.typicode.com/users/1 | jq .username
+    # "Bret"
+
+To get a field from each element in an array you can use the array/object value iterator .[], which can in turn be combined with the identifier index:
+
+    curl https://jsonplaceholder.typicode.com/users | jq '.[].username'
+    # "Bret"
+    # "Antonette"
+    # "Samantha"
+    # "Karianne"
+    # "Kamren"
+    # "Leopoldo_Corkery"
+    # "Elwyn.Skiles"
+    # "Maxime_Nienow"
+    # "Delphine"
+    # "Moriah.Stanton"
+
+
+Multiple Fields
+
+    curl https://jsonplaceholder.typicode.com/users/1 | jq '.name, .email'
+    # "Leanne Graham"
+    # "Sincere@april.biz"
