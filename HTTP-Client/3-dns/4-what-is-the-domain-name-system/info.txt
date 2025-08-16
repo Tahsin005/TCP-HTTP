@@ -1,0 +1,4 @@
+ICANN(International Corporation of Assigned Names and Numbers) is a not-for-profit organization that manages DNS for the entire internet.
+Whenever your computer attempts to resolve a domain name, it contacts one of ICANN's "root nameservers" whose address is included in your computer's networking configuration. From there, that nameserver can gather the domain records for a specific domain name from their distributed DNS database.
+
+DNS is a system that converts domain names to ip address
