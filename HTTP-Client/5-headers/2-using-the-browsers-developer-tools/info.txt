@@ -1,0 +1,10 @@
+Modern web browsers offer developers a powerful set of developer tools. The Developer Tools are a front-end web developer's best friend! For example, using the dev tools you can:
+
+    View the web page's JavaScript console output
+    Inspect the page's HTML, CSS, and JavaScript code
+    View network requests and responses, along with their headers.
+
+The network tab monitors your browser's network activity and records all of the requests and responses the browser is making, including how long each of those requests and responses takes to fully process.
+
+After refreshing the page, what are the most common status codes you see in the Network tab?
+- 200
