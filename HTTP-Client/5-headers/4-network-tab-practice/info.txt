@@ -1,0 +1,8 @@
+Header values are always numbers
+- False
+
+The 'Status Code' header on the responses have ____ values.
+- Number
+
+What is one of the values you see in the 'Response Headers' for the 'Content-Type' key? You might have to look at several requests.
+- application/json
