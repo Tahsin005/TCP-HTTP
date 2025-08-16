@@ -1,0 +1,5 @@
+Which is a human readable label that converts to an IP address?
+- A domain name
+
+Why don't we require users to type in IP addresses directly to browse the web?
+- Domain names are easier for humans to remember, it's a better experience
