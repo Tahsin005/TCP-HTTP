@@ -23,3 +23,10 @@ HTTPS ensures that you know WHO you are communicating with
 
 HTTPS protects your identity online
 - False (refer to line no: 10)
+
+*** The client verifies servers digital certificate to ensure it is communicating with the right server
+*** The client and server uses a public/private key pair to perform a handshake and securely agree on a shared symmetric encryption key
+*** From this point on, both the client and server encrypts and decrypts requests and responses using that encryption key
+** This ensures:
+    1. Only the client and server can read the request and response.
+    2. The client is communicating with the server it thinks it's communicating with.
