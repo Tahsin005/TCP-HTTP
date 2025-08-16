@@ -1,0 +1,9 @@
+Patch vs. PUT
+
+You may encounter the PATCH method from time to time. It's frankly not used very often. It's meant to partially modify a resource, whereas PUT is meant to completely replace a resource.
+
+PATCH is not as popular as PUT, and many servers, even if they allow partial updates, just use PUT.
+
+
+PUT typically updates ____ while PATCH updates ____
+- entire resource, a partial resources
