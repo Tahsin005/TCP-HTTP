@@ -1,0 +1,9 @@
+The simplest cURL command makes a GET request to the provided URL, for example:
+
+    curl https://jsonplaceholder.typicode.com/users/1
+
+The response body is written to stdout
+
+Because the output is written to stdout you can combine it with other commands, e.g. redirecting the output to a file.
+
+    curl https://jsonplaceholder.typicode.com/users/1 > user1.json
