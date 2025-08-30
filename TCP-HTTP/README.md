@@ -40,3 +40,10 @@ TCP establishes a connection between sender and receiver with a handshake, and e
 
         This command tries to open a TCP connection from your terminal to port 42069 on your local machine, and prints connection details.
 ```
+
+## UDP Sender
+
+```
+What's true of UDP?
+- It doesn't require a handshake
+```
