@@ -18,3 +18,25 @@ When data is sent over a network, it is sent in packets. Each message is split i
 
 You might end up with "i am evil" instead of "i am live"! TCP solves this problem.
 ```
+
+## TCP vs UDP
+
+```
+User Datagram Protocol (UDP) is often compared to TCP, as they are both transport layer protocols. Here are the high-level differences between the two:
+	            TCP 	UDP
+Connection 	    Yes 	No
+Handshake 	    Yes 	No
+In Order 	    Yes 	No
+Blazingly Fast 	No 	    Yes
+
+TCP establishes a connection between sender and receiver with a handshake, and ensures that all the data is sent in order. UDP yeets the data to the receiver and hopes they can make sense of it.
+
+    nc -v localhost 42069
+
+        nc → Netcat, a tool for reading/writing to network connections.
+        -v → Verbose mode, gives more connection details.
+        localhost → Target host (your own machine).
+        42069 → Target port number.
+
+        This command tries to open a TCP connection from your terminal to port 42069 on your local machine, and prints connection details.
+```
