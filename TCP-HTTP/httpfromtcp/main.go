@@ -4,21 +4,21 @@ import (
 	"fmt"
 	"io"
 	"log"
-	"os"
+	"net"
 	"strings"
 )
 
-func getLinesChannel(f io.ReadCloser) <-chan string {
+func getLinesChannel(conn net.Conn) <-chan string {
 	ch := make(chan string)
 	go func() {
-		defer f.Close()
+		defer conn.Close()
 		defer close(ch)
 
 		buffer := make([]byte, 8)
 		var currentLine string
 
 		for {
-			bytesRead, err := f.Read(buffer)
+			bytesRead, err := conn.Read(buffer)
 			if err == io.EOF {
 				if bytesRead > 0 {
 					parts := strings.Split(string(buffer[:bytesRead]), "\n")
@@ -63,57 +63,27 @@ func getLinesChannel(f io.ReadCloser) <-chan string {
 }
 
 func main() {
-	fileName := "messages.txt"
-
-	file, err := os.Open(fileName)
-	if err != nil {
-		log.Fatalf("failed to open file: %s", err)
+	listener, err := net.Listen("tcp", ":42069")
+    if err != nil {
+		fmt.Println("Error listening:", err.Error())
+		return
 	}
-	// defer file.Close()
+	defer listener.Close()
 
-	// buffer := make([]byte, 8)
-    // var currentLine string
+	fmt.Println("Listening on :42069")
 
-	// for {
-	// 	bytesRead, err := file.Read(buffer)
+    for {
+		conn, err := listener.Accept()
+		if err != nil {
+			fmt.Println("Error accepting connection:", err.Error())
+			continue
+		}
 
-	// 	if err == io.EOF {
-	// 		if bytesRead > 0 {
-	// 			parts := strings.Split(string(buffer[:bytesRead]), "\n")
-	// 			currentLine += parts[0]
-	// 			if currentLine != "" {
-	// 				fmt.Printf("read: %s\n", currentLine)
-	// 			}
-	// 			if len(parts) > 1 {
-	// 				for _, part := range parts[1:] {
-	// 					if part != "" {
-	// 						fmt.Printf("read: %s\n", part)
-	// 					}
-	// 				}
-	// 			}
-	// 		}
-    //         fmt.Println("read: end")
-	// 		break
-	// 	}
-
-	// 	if bytesRead > 0 {
-	// 		parts := strings.Split(string(buffer[:bytesRead]), "\n")
-	// 		for i, part := range parts {
-	// 			if i < len(parts) - 1 {
-	// 				currentLine += part
-	// 				if currentLine != "" {
-	// 					fmt.Printf("read: %s\n", currentLine)
-	// 					currentLine = ""
-	// 				}
-	// 			} else {
-	// 				currentLine += part
-	// 			}
-	// 		}
-	// 	}
-	// }
-
-    lines := getLinesChannel(file)
-	for line := range lines {
-		fmt.Printf("read: %s\n", line)
+		fmt.Println("Connection accepted")
+		lines := getLinesChannel(conn)
+		for line := range lines {
+			fmt.Println(line)
+		}
+		fmt.Println("Connection closed")
 	}
 }
