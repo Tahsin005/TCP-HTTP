@@ -47,3 +47,29 @@ TCP establishes a connection between sender and receiver with a handshake, and e
 What's true of UDP?
 - It doesn't require a handshake
 ```
+
+## Files Vs Network
+
+```
+Files and network connections behave very similarly - that's why we started by simply reading and writing to files, then updated our code to be a bit more abstract (the getLinesChannel function) so that it can handle both. From the perspective of your code, files and network connections are both just streams of bytes that you can read from and write to.
+
+All of a sudden, Go's io.Reader (and the very similar io.ReadCloser) and io.Writer interfaces make a lot more sense. They're designed to work with any type of stream, whether it's a file, a network connection, or something else entirely.
+
+Pull vs. Push
+
+When you read from a file, you're in control of the reading process. You decide:
+
+    When to read
+    How much to read
+    When to stop reading.
+
+You pull data from the file.
+
+When you read from a network connection, the data is pushed to you by the remote server. You don't have control over when the data arrives, how much arrives, or when it stops arriving. Your code has to be ready to receive it when it comes.
+
+The io.Reader and io.Writer interfaces in Go are useful for reading and writing data to and from ____
+- Both file and network
+
+Which pushes data to the application that's reading from it, resulting in the reader needing to be prepared to read data?
+- Network connections
+```
