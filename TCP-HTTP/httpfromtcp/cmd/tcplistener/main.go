@@ -8,49 +8,56 @@ import (
 	"net"
 )
 
-func handleConnection(conn net.Conn) {
-	defer conn.Close()
+func handleConnection(conn net.Conn) <-chan string {
+	out := make(chan string)
 
-	reader := bufio.NewReader(conn)
-	fmt.Println("Connection accepted")
+	go func() {
+		defer conn.Close()
+		defer close(out)
 
-	// Read headers line by line
-	for {
-		line, err := reader.ReadString('\n')
-		if err != nil {
-			if err != io.EOF {
-				log.Println("error reading headers:", err)
+		reader := bufio.NewReader(conn)
+		out <- "Connection accepted"
+
+		// Read headers line by line
+		for {
+			line, err := reader.ReadString('\n')
+			if err != nil {
+				if err != io.EOF {
+					log.Println("error reading headers:", err)
+				}
+				return
 			}
-			return
+
+			// Detect end of headers
+			if line == "\r\n" {
+				out <- "(end of headers)"
+				break
+			}
+
+			out <- line[:len(line)-1] // trim trailing \n
 		}
 
-		// Trim CRLF
-		if line == "\r\n" {
-			fmt.Println("(end of headers)")
-			break
+		// Read body as raw bytes
+		out <- "Body:"
+		buf := make([]byte, 1024)
+		for {
+			n, err := reader.Read(buf)
+			if n > 0 {
+				out <- string(buf[:n])
+			}
+			if err == io.EOF {
+				break
+			}
+			if err != nil {
+				log.Println("error reading body:", err)
+				break
+			}
 		}
 
-		fmt.Print(line)
-	}
+		out <- "Connection closed"
+	}()
 
-	// Read body as raw bytes
-	fmt.Println("Body:")
-	buf := make([]byte, 1024)
-	for {
-		n, err := reader.Read(buf)
-		if n > 0 {
-			fmt.Print(string(buf[:n]))
-		}
-		if err == io.EOF {
-			break
-		}
-		if err != nil {
-			log.Println("error reading body:", err)
-			break
-		}
-	}
-
-	fmt.Println("\nConnection closed")
+	return out
 }
 
 func main() {
@@ -68,6 +75,10 @@ func main() {
 			log.Println("Error accepting connection:", err)
 			continue
 		}
-		go handleConnection(conn)
+
+		lines := handleConnection(conn)
+		for line := range lines {
+			fmt.Println(line)
+		}
 	}
 }
