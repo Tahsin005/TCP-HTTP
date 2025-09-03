@@ -105,3 +105,9 @@ Let's break down each part:
 
 Both HTTP requests and responses follow this same format, though the contents of each section will differ!
 ```
+
+## HTTP Post
+
+```
+
+```
