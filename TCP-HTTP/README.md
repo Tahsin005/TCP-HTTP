@@ -109,5 +109,24 @@ Both HTTP requests and responses follow this same format, though the contents of
 ## CURL
 
 ```
+curl is a command line tool for making HTTP requests.
 
+GET /goodies HTTP/1.1       # start-line CRLF
+Host: localhost:42069       # *( field-line CRLF )
+User-Agent: curl/7.81.0     # *( field-line CRLF )
+Accept: */*                 # *( field-line CRLF )
+                            # CRLF
+                            # [ message-body ] (empty)
+
+POST /coffee HTTP/1.1            # start-line CRLF
+Host: localhost:42069            # *( field-line CRLF )
+User-Agent: curl/8.6.0           # *( field-line CRLF )
+Accept: */*                      # *( field-line CRLF )
+Content-Type: application/json   # *( field-line CRLF )
+Content-Length: 22               # *( field-line CRLF )
+                                 # CRLF
+{"flavor":"dark mode"}          # [ message-body ]
+
+Which line is not a header (field-line)?
+- GET /goodies HTTP/1.1
 ```
