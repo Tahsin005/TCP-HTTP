@@ -6,8 +6,6 @@ import (
 	"io"
 	"log"
 	"net"
-
-	"github.com/tahsin005/httpfromtcp/internal/request"
 )
 
 func handleConnection(conn net.Conn) <-chan string {
@@ -17,22 +15,29 @@ func handleConnection(conn net.Conn) <-chan string {
 		defer conn.Close()
 		defer close(out)
 
-		// Pass connection directly to RequestFromReader
 		reader := bufio.NewReader(conn)
+		out <- "Connection accepted"
 
-		// Pass the buffered reader (satisfies io.Reader)
-		req, err := request.RequestFromReader(reader)
-		if err != nil {
-			out <- fmt.Sprintf("Error parsing request: %v", err)
-			return
+		// Read headers line by line
+		for {
+			line, err := reader.ReadString('\n')
+			if err != nil {
+				if err != io.EOF {
+					log.Println("error reading headers:", err)
+				}
+				return
+			}
+
+			// Detect end of headers
+			if line == "\r\n" {
+				out <- "(end of headers)"
+				break
+			}
+
+			out <- line[:len(line)-1] // trim trailing \n
 		}
 
-		// Print parsed request line
-		out <- fmt.Sprintf("Method: %s", req.RequestLine.Method)
-		out <- fmt.Sprintf("Target: %s", req.RequestLine.RequestTarget)
-		out <- fmt.Sprintf("Version: %s", req.RequestLine.HttpVersion)
-
-		// Continue reading remaining body using the same buffered reader
+		// Read body as raw bytes
 		out <- "Body:"
 		buf := make([]byte, 1024)
 		for {

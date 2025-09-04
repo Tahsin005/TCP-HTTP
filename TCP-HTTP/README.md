@@ -130,3 +130,66 @@ Content-Length: 22               # *( field-line CRLF )
 Which line is not a header (field-line)?
 - GET /goodies HTTP/1.1
 ```
+
+## Parsing the reqeust line
+
+```
+For example, given:
+
+    POST /coffee HTTP/1.1
+    Host: localhost:42069
+    User-Agent: curl/7.81.0
+    Accept: */*
+    Content-Length: 21
+
+    {"flavor":"dark mode"}
+
+We want our HTTP parser to return a struct that looks like this:
+
+type Request struct {
+    RequestLine RequestLine
+    Headers     map[string]string
+    Body        []byte
+}
+
+That way our application logic (the server code) has nicely structured HTTP data to work with.
+
+Our goal is to take the server we created in the last section and have it parse out the start-line according to the RFC here.
+
+
+The Request Line
+
+Remember how HTTP messages start with a start-line? Well, if it's a request (not a response), then the start-line is called the request-line and has a specific format.
+
+HTTP-version  = HTTP-name "/" DIGIT "." DIGIT
+HTTP-name     = %s"HTTP"
+request-line  = method SP request-target SP HTTP-version
+
+Rule Reminder (ABNF)
+request-line = method SP request-target SP HTTP-version
+
+    Where:
+    method → GET, POST, etc.
+    SP → space character " "
+    request-target → usually a path or *
+
+HTTP-version → HTTP/ followed by major.minor digits
+
+Example 1: A simple GET request line
+GET /index.html HTTP/1.1
+
+Breakdown:
+
+method → GET
+request-target → /index.html
+HTTP-version → HTTP/1.1
+
+Example 2: A POST request line
+
+POST /api/users HTTP/1.0
+
+Breakdown:
+method → POST
+request-target → /api/users
+HTTP-version → HTTP/1.0
+```
